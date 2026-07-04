@@ -1,5 +1,9 @@
+agno
 groq
 sqlalchemy
 pgvector
 psycopg[binary]
 pypdf
+typer
+ollama
+python-dotenv
