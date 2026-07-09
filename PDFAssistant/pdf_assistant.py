@@ -13,7 +13,7 @@ from agno.vectordb.pgvector import PgVector
 
 load_dotenv()
 
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+groq_key = os.getenv("GROQ_API_KEY")
 
 db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 
@@ -49,14 +49,14 @@ def pdf_assistant(new: bool = False, user: str = "user")-> None:
                   typer.echo("Unknown session ID — starting a new session instead.")
   
   agent = Agent(
-    model=Groq(id="llama-3.3-70b-versatile"),
+    model=Groq(id="llama-3.3-70b-versatile", api_key = groq_key),
     session_id=session_id,
     user_id=user,
     knowledge=knowledge,
     db=db,
     search_knowledge=True,
-    read_chat_history=True,
-    add_history_to_context=True
+    read_chat_history=False,
+    add_history_to_context=False
   )
   
   if session_id is None:
